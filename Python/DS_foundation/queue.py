@@ -28,8 +28,8 @@ class SeqQueue(object):
 
 class LinkNode(object):
 
-    def __init__(self):
-        self.data = None
+    def __init__(self, data):
+        self.data = data
         self.next = None
 
 
@@ -39,9 +39,7 @@ class LinkQueue(object):
         self.front = None
         self.rear = None
 
-    def enqueue(self, data):
-        new_node = LinkNode()
-        new_node.data = data
+    def enqueue(self, new_node):
         if not self.front:
             self.front = new_node
             self.rear = new_node
@@ -52,9 +50,9 @@ class LinkQueue(object):
     def dequeue(self):
         if not self.front:
             raise Exception("can not dequeue a empty queue")
-        data = self.front.data
-        self.front = self.front.next
-        return data
+        de_node = self.front
+        self.front = de_node.next
+        return de_node
 
     def show(self):
         data = []
@@ -63,6 +61,9 @@ class LinkQueue(object):
             data.append(str(node.data))
             node = node.next
         print(",".join(data))
+
+    def empty(self):
+        return True if not self.front else False
 
 
 if __name__ == "__main__":
@@ -77,10 +78,12 @@ if __name__ == "__main__":
     print()
     link_queue = LinkQueue()
     print("full link queue: ")
-    [link_queue.enqueue(i) for i in range(6)]
+    [link_queue.enqueue(LinkNode(i)) for i in range(6)]
     link_queue.show()
     print("dequeue 3 item: ")
     link_queue.dequeue()
     link_queue.dequeue()
     link_queue.dequeue()
     link_queue.show()
+    print("queue is empty:")
+    print(link_queue.empty())
