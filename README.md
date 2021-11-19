@@ -6,4 +6,6 @@
       - #### [link_list：单链表定义及其基本操作](https://github.com/XiangtingLee/Algorithm/blob/master/Python/DS_foundation/link_list.py)
       - #### [stack：堆栈定义及其基本操作](https://github.com/XiangtingLee/Algorithm/blob/master/Python/DS_foundation/stack.py)
       - #### [queue：队列定义及其基本操作](https://github.com/XiangtingLee/Algorithm/blob/master/Python/DS_foundation/queue.py)
+   2. ## [Tree](https://github.com/XiangtingLee/Algorithm/tree/master/Python/Tree)
+      - #### [binary_tree：二叉树定义及遍历(BFS/DFS)](https://github.com/XiangtingLee/Algorithm/blob/master/Python/DS_foundation/binary_tree.py)
 2. ## [Java](https://github.com/XiangtingLee/Algorithm/tree/master/Java)
