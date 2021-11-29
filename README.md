@@ -13,4 +13,5 @@
    3. ## [Sort](https://github.com/XiangtingLee/Algorithm/tree/master/Python/Sort)
       - #### [bubble_sort：冒泡排序及其改进版本](https://github.com/XiangtingLee/Algorithm/blob/master/Python/Sort/bubble_sort.py)
       - #### [cocktail_sort: 鸡尾酒排序](https://github.com/XiangtingLee/Algorithm/blob/master/Python/Sort/cocktail_sort.py)
+      - #### [quick_sort: 快速排序](https://github.com/XiangtingLee/Algorithm/blob/master/Python/Sort/quick_sort.py)
 2. ## [Java](https://github.com/XiangtingLee/Algorithm/tree/master/Java)
