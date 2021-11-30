@@ -14,18 +14,13 @@ class BinaryHeap(object):
         """
         child_index = len(self.heap) - 1                                        # left_child_index = (parent_index*2)+1
         parent_index = (child_index - 1) // 2                                   # right_child_index = (parent_index*2)+2
-        cache_child_item = self.heap[child_index]                               # 缓存移动的节点
-        if big_top:
-            while child_index > 0 and cache_child_item > self.heap[parent_index]:   # 当前节点小于父节点时
-                self.heap[child_index] = self.heap[parent_index]                    # 父节点下移
-                child_index = parent_index                                          # 当前被移动节点的索引修改为父节点的索引
-                parent_index = (child_index - 1) // 2                               # 继续向上寻找父节点
-        else:
-            while child_index > 0 and cache_child_item < self.heap[parent_index]:   # 当前节点小于父节点时
-                self.heap[child_index] = self.heap[parent_index]                    # 父节点下移
-                child_index = parent_index                                          # 当前被移动节点的索引修改为父节点的索引
-                parent_index = (child_index - 1) // 2                               # 继续向上寻找父节点
-        self.heap[child_index] = cache_child_item                               # 当前节点大于父节点时不上浮，将节点置于此
+        while child_index > 0 and (
+                (self.heap[child_index] > self.heap[parent_index] and big_top) or
+                (self.heap[child_index] < self.heap[parent_index] and not big_top)
+        ):                                                                          # 当前节点与父节点不满足排序关系时
+            self.heap[child_index] = self.heap[parent_index]                        # 父节点下移
+            child_index = parent_index                                              # 修改被移动节点索引
+            parent_index = (child_index - 1) // 2                                   # 继续向上寻找父节点
 
     def down_adjust(self, parent_index, length, big_top=True):
         """
@@ -36,22 +31,20 @@ class BinaryHeap(object):
         :return: None
         """
         child_index = (parent_index * 2) + 1
-        cache_parent_item = self.heap[parent_index]
         while child_index < length:
-            if big_top:
-                if child_index + 1 < length and self.heap[child_index] < self.heap[child_index + 1]:
-                    child_index += 1                                                # 如果右子节点更大，定位到右子节点
-                if cache_parent_item >= self.heap[child_index]:                     # 如果父节点大于等于任何子节点
-                    break                                                           # 直接跳出
-            else:
-                if child_index + 1 < length and self.heap[child_index] > self.heap[child_index + 1]:
-                    child_index += 1                                                # 如果右子节点更小，定位到右子节点
-                if cache_parent_item <= self.heap[child_index]:                     # 如果父节点小于等于任何子节点
-                    break                                                           # 直接跳出
-            self.heap[parent_index] = self.heap[child_index]                        # 右子节点上移
+            if child_index + 1 < length and (
+                    (self.heap[child_index] < self.heap[child_index + 1] and big_top) or
+                    (self.heap[child_index] > self.heap[child_index + 1] and not big_top)
+            ):
+                child_index += 1                                                            # 找到更大(或更小)的子节点
+            if self.heap[parent_index] == self.heap[child_index] or (
+                    (self.heap[parent_index] > self.heap[child_index] and big_top) or
+                    (self.heap[parent_index] < self.heap[child_index] and not big_top)
+            ):                                                                              # 判断父子节点的大小关系
+                break                                                                       # 不符合排序规则直接跳出
+            self.heap[parent_index], self.heap[child_index] = self.heap[child_index], self.heap[parent_index]  # 节点上移
             parent_index = child_index                                              # 当前被移动节点的索引改为右子节点的索引
             child_index = (child_index * 2) + 1                                     # 左子节点
-        self.heap[parent_index] = cache_parent_item
 
     def build_heap(self, big_top=True):
         """
@@ -71,6 +64,9 @@ class BinaryHeap(object):
 
 
 if __name__ == "__main__":
-    binary_heap = BinaryHeap([6, 8, 7, 5, 3, 1, 10, 2, 9])
-    binary_heap.build_heap(False)
-    binary_heap.show_heap()
+    binary_big_top_heap = BinaryHeap([6, 8, 7, 5, 3, 1, 10, 2, 9])
+    binary_big_top_heap.build_heap()
+    binary_big_top_heap.show_heap()
+    binary_small_top_heap = BinaryHeap([10, 7, 9, 8, 1, 4, 6, 3, 2])
+    binary_small_top_heap.build_heap(False)
+    binary_small_top_heap.show_heap()
