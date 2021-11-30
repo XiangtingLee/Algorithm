@@ -32,9 +32,13 @@ class HeapSort(BinaryHeap):
 
 
 if __name__ == "__main__":
-    heap_sort = HeapSort([6, 8, 7, 5, 3, 1, 10, 2, 9])
-    heap_sort.build_heap()
-    heap_sort.show_heap()
-    heap_sort.sort()
-    heap_sort.show_heap()
-
+    heap_sort_asc = HeapSort([6, 8, 7, 5, 3, 1, 10, 2, 9])
+    heap_sort_asc.build_heap()
+    heap_sort_asc.show_heap()
+    heap_sort_asc.sort()
+    heap_sort_asc.show_heap()
+    heap_sort_desc = HeapSort([6, 8, 7, 5, 3, 1, 10, 2, 9])
+    heap_sort_desc.build_heap(False)
+    heap_sort_desc.show_heap()
+    heap_sort_desc.sort()
+    heap_sort_desc.show_heap()
